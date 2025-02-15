@@ -1,5 +1,5 @@
 import { fetchAPI } from "../utils/fetch-api";
-import { getStrapiUrl } from "../utils/get-strapi-url";
+import { getStrapiURL } from "../utils/get-strapi-url";
 import qs from "qs";
 
 const homePageQuery = qs.stringify({
@@ -21,7 +21,7 @@ const homePageQuery = qs.stringify({
 
 export async function getHomePage() {
   const path = "/api/home-page";
-  const BASE_URL = getStrapiUrl();
+  const BASE_URL = getStrapiURL();
 
   const url = new URL(path, BASE_URL);
   url.search = homePageQuery;

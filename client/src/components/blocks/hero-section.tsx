@@ -1,6 +1,6 @@
 import { HeroSectionProps } from "@/types";
-import Image from "next/image";
 import Link from "next/link";
+import { StrapiImage } from "./strapi-image";
 
 export default function HeroSection({
   heading,
@@ -8,7 +8,7 @@ export default function HeroSection({
   badge,
   image,
   cta,
-}: HeroSectionProps) {
+}: Readonly<HeroSectionProps>) {
   return (
     <section className="pt-32 pb-16 px-4">
       <div className="container mx-auto">
@@ -31,7 +31,7 @@ export default function HeroSection({
             </div>
           </div>
           <div className="relative">
-            <Image
+            <StrapiImage
               src={image.url}
               width={800}
               height={600}
