@@ -1,5 +1,18 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface BlocksFeaturedProject extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_featured_projects';
+  info: {
+    displayName: 'Featured Project';
+  };
+  attributes: {
+    cta: Schema.Attribute.Component<'elements.link', false>;
+    heading: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images'>;
+    subheading: Schema.Attribute.String;
+  };
+}
+
 export interface BlocksHeroSection extends Struct.ComponentSchema {
   collectionName: 'components_blocks_hero_sections';
   info: {
@@ -16,18 +29,6 @@ export interface BlocksHeroSection extends Struct.ComponentSchema {
   };
 }
 
-export interface BlocksProjectsSection extends Struct.ComponentSchema {
-  collectionName: 'components_blocks_projects_sections';
-  info: {
-    description: '';
-    displayName: 'Projects Section';
-  };
-  attributes: {
-    projects: Schema.Attribute.Component<'elements.card', true>;
-    title: Schema.Attribute.String;
-  };
-}
-
 export interface BlocksServicesSection extends Struct.ComponentSchema {
   collectionName: 'components_blocks_services_sections';
   info: {
@@ -38,15 +39,17 @@ export interface BlocksServicesSection extends Struct.ComponentSchema {
   };
 }
 
-export interface ElementsCard extends Struct.ComponentSchema {
-  collectionName: 'components_elements_cards';
+export interface BlocksSubscribe extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_subscribes';
   info: {
-    displayName: 'Card';
+    description: '';
+    displayName: 'Subscribe';
   };
   attributes: {
-    description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    title: Schema.Attribute.String;
+    buttonText: Schema.Attribute.String;
+    heading: Schema.Attribute.String;
+    input: Schema.Attribute.String;
+    subheading: Schema.Attribute.String;
   };
 }
 
@@ -102,10 +105,10 @@ export interface LayoutHeader extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'blocks.featured-project': BlocksFeaturedProject;
       'blocks.hero-section': BlocksHeroSection;
-      'blocks.projects-section': BlocksProjectsSection;
       'blocks.services-section': BlocksServicesSection;
-      'elements.card': ElementsCard;
+      'blocks.subscribe': BlocksSubscribe;
       'elements.link': ElementsLink;
       'elements.logo': ElementsLogo;
       'layout.footer': LayoutFooter;

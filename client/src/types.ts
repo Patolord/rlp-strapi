@@ -17,14 +17,11 @@ export interface LogoProps {
   image: ImageProps;
 }
 
-export interface ProjectProps {
-  id: number;
-  title: string;
-  description: string;
-  image: ImageProps;
-}
-
-type ComponentType = "blocks.hero-section" | "blocks.services-section";
+type ComponentType =
+  | "blocks.hero-section"
+  | "blocks.services-section"
+  | "blocks.featured-project"
+  | "blocks.subscribe";
 
 interface Base<
   T extends ComponentType,
@@ -39,7 +36,11 @@ interface Base<
   data?: D;
 }
 
-export type Block = HeroSectionProps | ServicesSectionProps;
+export type Block =
+  | HeroSectionProps
+  | ServicesSectionProps
+  | FeaturedProjectProps
+  | SubscribeProps;
 
 export interface HeroSectionProps extends Base<"blocks.hero-section"> {
   theme: "turquoise" | "orange";
@@ -53,4 +54,17 @@ export interface HeroSectionProps extends Base<"blocks.hero-section"> {
 
 export interface ServicesSectionProps extends Base<"blocks.services-section"> {
   heading: string;
+}
+export interface FeaturedProjectProps extends Base<"blocks.featured-project"> {
+  heading: string;
+  subheading: string;
+  image: ImageProps;
+  cta: LinkProps;
+}
+
+export interface SubscribeProps extends Base<"blocks.subscribe"> {
+  heading: string;
+  subheading: string;
+  input: string;
+  buttonText: string;
 }
