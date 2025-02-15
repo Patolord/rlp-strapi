@@ -1,15 +1,19 @@
-interface PageProps {
-  params: Promise<{
-    slug: string;
-  }>;
+import { getPageBySlug } from "@/data/loaders";
+import { notFound } from "next/navigation";
+import { BlockRenderer } from "@/components/block-renderer";
+
+async function loader(slug: string) {
+  const { data } = await getPageBySlug(slug);
+  if (data.length === 0) notFound();
+  return { blocks: data[0]?.blocks };
 }
 
-export default async function DynamicPage({ params }: PageProps) {
-  const slug = (await params).slug;
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
 
-  return (
-    <div>
-      <h1>{slug}</h1>
-    </div>
-  );
+export default async function DynamicPageRoute({ params }: PageProps) {
+  const slug = (await params).slug;
+  const { blocks } = await loader(slug);
+  return <BlockRenderer blocks={blocks} />;
 }
