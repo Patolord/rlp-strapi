@@ -45,10 +45,5 @@ export interface HeroSectionProps extends Base<"blocks.hero-section"> {
 }
 
 export interface ServicesSectionProps extends Base<"blocks.services-section"> {
-  theme: "turquoise" | "orange";
-  reversed?: boolean;
-  headline: string;
-  content: string;
-  image: ImageProps;
-  cta?: LinkProps;
+  heading: string;
 }

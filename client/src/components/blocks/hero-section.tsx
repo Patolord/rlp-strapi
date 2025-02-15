@@ -1,6 +1,6 @@
 import { HeroSectionProps } from "@/types";
 import Link from "next/link";
-import { StrapiImage } from "./strapi-image";
+import { StrapiImage } from "../strapi-image";
 
 export default function HeroSection({
   heading,
@@ -33,8 +33,8 @@ export default function HeroSection({
           <div className="relative">
             <StrapiImage
               src={image.url}
-              width={800}
-              height={600}
+              width={500}
+              height={500}
               alt={image.alternativeText}
               className="object-cover"
               priority
