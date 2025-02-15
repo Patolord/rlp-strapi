@@ -17,6 +17,13 @@ export interface LogoProps {
   image: ImageProps;
 }
 
+export interface ProjectProps {
+  id: number;
+  title: string;
+  description: string;
+  image: ImageProps;
+}
+
 type ComponentType = "blocks.hero-section" | "blocks.services-section";
 
 interface Base<

@@ -16,6 +16,18 @@ export interface BlocksHeroSection extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksProjectsSection extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_projects_sections';
+  info: {
+    description: '';
+    displayName: 'Projects Section';
+  };
+  attributes: {
+    projects: Schema.Attribute.Component<'elements.card', true>;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface BlocksServicesSection extends Struct.ComponentSchema {
   collectionName: 'components_blocks_services_sections';
   info: {
@@ -23,6 +35,18 @@ export interface BlocksServicesSection extends Struct.ComponentSchema {
   };
   attributes: {
     headline: Schema.Attribute.String;
+  };
+}
+
+export interface ElementsCard extends Struct.ComponentSchema {
+  collectionName: 'components_elements_cards';
+  info: {
+    displayName: 'Card';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    title: Schema.Attribute.String;
   };
 }
 
@@ -49,13 +73,43 @@ export interface ElementsLogo extends Struct.ComponentSchema {
   };
 }
 
+export interface LayoutFooter extends Struct.ComponentSchema {
+  collectionName: 'components_layout_footers';
+  info: {
+    description: '';
+    displayName: 'Footer';
+  };
+  attributes: {
+    copy: Schema.Attribute.String;
+    logo: Schema.Attribute.Component<'elements.logo', false>;
+    navigation: Schema.Attribute.Component<'elements.link', true>;
+    policies: Schema.Attribute.Component<'elements.link', true>;
+  };
+}
+
+export interface LayoutHeader extends Struct.ComponentSchema {
+  collectionName: 'components_layout_headers';
+  info: {
+    displayName: 'Header';
+  };
+  attributes: {
+    cta: Schema.Attribute.Component<'elements.link', false>;
+    logo: Schema.Attribute.Component<'elements.logo', false>;
+    navigation: Schema.Attribute.Component<'elements.link', true>;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'blocks.hero-section': BlocksHeroSection;
+      'blocks.projects-section': BlocksProjectsSection;
       'blocks.services-section': BlocksServicesSection;
+      'elements.card': ElementsCard;
       'elements.link': ElementsLink;
       'elements.logo': ElementsLogo;
+      'layout.footer': LayoutFooter;
+      'layout.header': LayoutHeader;
     }
   }
 }
