@@ -1,5 +1,7 @@
 import { ProjectProps } from "@/types";
 import { getContent } from "@/data/loaders";
+import { Search } from "@/components/search";
+import { PaginationComponent } from "@/components/pagination-component";
 
 interface ContentListProps {
   headline: string;
@@ -8,12 +10,21 @@ interface ContentListProps {
   featured?: boolean;
   component: React.ComponentType<ProjectProps & { basePath: string }>;
   headlineAlignment?: "center" | "right" | "left";
+  showSearch?: boolean;
+  page?: string;
+  showPagination?: boolean;
 }
 
-async function loader(path: string, featured?: boolean) {
-  const { data, meta } = await getContent(path, featured);
+async function loader(
+  path: string,
+  featured?: boolean,
+  query?: string,
+  page?: string
+) {
+  const { data, meta } = await getContent(path, featured, query, page);
   return {
     projects: (data as ProjectProps[]) || [],
+    pageCount: meta?.pagination?.pageCount || 1,
   };
 }
 
@@ -23,8 +34,12 @@ export async function ContentList({
   component,
   headlineAlignment,
   featured,
+  showSearch,
+  query,
+  showPagination,
+  page,
 }: Readonly<ContentListProps>) {
-  const { projects } = await loader(path, featured);
+  const { projects, pageCount } = await loader(path, featured, query, page);
   const Component = component;
   return (
     <section className="container mx-auto px-4 py-12">
@@ -35,11 +50,13 @@ export async function ContentList({
       >
         {headline || "Featured Projects"}
       </h3>
+      {showSearch && <Search />}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (
           <Component key={project.documentId} {...project} basePath={path} />
         ))}
       </div>
+      {showPagination && <PaginationComponent pageCount={pageCount} />}
     </section>
   );
 }

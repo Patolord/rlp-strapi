@@ -11,7 +11,12 @@ async function loader(slug: string) {
   return { blocks: data[0]?.blocks };
 }
 
-export default async function BlogPage() {
+interface BlogPageProps {
+  searchParams: Promise<{ query?: string; page?: string }>;
+}
+
+export default async function BlogPage({ searchParams }: BlogPageProps) {
+  const { query, page } = await searchParams;
   const { blocks } = await loader("blog");
   return (
     <div className="min-h-screen">
@@ -21,6 +26,10 @@ export default async function BlogPage() {
         path="/api/projetos"
         component={BlogCard}
         headlineAlignment="center"
+        showSearch
+        query={query}
+        showPagination
+        page={page}
       />
     </div>
   );
