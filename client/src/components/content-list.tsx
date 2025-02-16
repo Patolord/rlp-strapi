@@ -10,10 +10,10 @@ interface ContentListProps {
   headlineAlignment?: "center" | "right" | "left";
 }
 
-async function loader(path: string) {
-  const { data, meta } = await getContent(path);
+async function loader(path: string, featured?: boolean) {
+  const { data, meta } = await getContent(path, featured);
   return {
-    projetos: (data as ProjectProps[]) || [],
+    projects: (data as ProjectProps[]) || [],
   };
 }
 
@@ -22,16 +22,21 @@ export async function ContentList({
   path,
   component,
   headlineAlignment,
+  featured,
 }: Readonly<ContentListProps>) {
-  const { projetos } = await loader(path);
+  const { projects } = await loader(path, featured);
   const Component = component;
   return (
-    <section className="content-items container">
-      <h3 className={`content-items__headline ${headlineAlignment ?? ""}`}>
+    <section className="container mx-auto px-4 py-12">
+      <h3
+        className={`text-3xl font-bold mb-8 text-${
+          headlineAlignment ?? "left"
+        }`}
+      >
         {headline || "Featured Projects"}
       </h3>
-      <div className="content-items__container--card">
-        {projetos.map((project) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projects.map((project) => (
           <Component key={project.documentId} {...project} basePath={path} />
         ))}
       </div>

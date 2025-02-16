@@ -1,30 +1,26 @@
 import { getPageBySlug } from "@/data/loaders";
 import { notFound } from "next/navigation";
 import { BlockRenderer } from "@/components/block-renderer";
-import { Card, type CardProps } from "@/components/card";
+
 import { ContentList } from "@/components/content-list";
+import BlogCard from "@/components/blog-card";
 
 async function loader(slug: string) {
-  const { data } = await getPageBySlug("blog");
+  const { data } = await getPageBySlug(slug);
   if (data.length === 0) notFound();
   return { blocks: data[0]?.blocks };
 }
 
-interface PageProps {
-  params: Promise<{ slug: string }>;
-}
-
-export default async function BlogPage({ params }: PageProps) {
-  const slug = (await params).slug;
-
-  const { blocks } = await loader(slug);
+export default async function BlogPage() {
+  const { blocks } = await loader("blog");
   return (
-    <div className="">
+    <div className="min-h-screen">
       <BlockRenderer blocks={blocks} />
       <ContentList
         headline="Veja nossos projetos"
         path="/api/projetos"
-        component={Card}
+        component={BlogCard}
+        headlineAlignment="center"
       />
     </div>
   );
