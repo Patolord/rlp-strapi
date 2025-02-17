@@ -73,6 +73,16 @@ export interface BlocksParagraphWithImage extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksProjectsSection extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_projects_sections';
+  info: {
+    displayName: 'Projects Section';
+  };
+  attributes: {
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface BlocksServicesSection extends Struct.ComponentSchema {
   collectionName: 'components_blocks_services_sections';
   info: {
@@ -155,6 +165,7 @@ declare module '@strapi/strapi' {
       'blocks.hero-section': BlocksHeroSection;
       'blocks.paragraph': BlocksParagraph;
       'blocks.paragraph-with-image': BlocksParagraphWithImage;
+      'blocks.projects-section': BlocksProjectsSection;
       'blocks.services-section': BlocksServicesSection;
       'blocks.subscribe': BlocksSubscribe;
       'elements.link': ElementsLink;

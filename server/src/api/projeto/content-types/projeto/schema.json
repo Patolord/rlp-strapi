@@ -26,7 +26,7 @@
     },
     "image": {
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "allowedTypes": [
         "images"
@@ -41,9 +41,9 @@
       "components": [
         "blocks.paragraph",
         "blocks.paragraph-with-image",
-        "blocks.hero-section",
         "blocks.heading",
-        "blocks.full-image"
+        "blocks.full-image",
+        "blocks.hero-section"
       ]
     }
   }

@@ -517,9 +517,9 @@ export interface ApiProjetoProjeto extends Struct.CollectionTypeSchema {
       [
         'blocks.paragraph',
         'blocks.paragraph-with-image',
-        'blocks.hero-section',
         'blocks.heading',
         'blocks.full-image',
+        'blocks.hero-section',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;
@@ -527,7 +527,7 @@ export interface ApiProjetoProjeto extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
     featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    image: Schema.Attribute.Media<'images', true>;
+    image: Schema.Attribute.Media<'images'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
